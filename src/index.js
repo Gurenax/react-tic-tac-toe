@@ -8,16 +8,14 @@ import './index.css';
 // Square - a Board has 9 Square components
 
 // SQUARE Component
-class Square extends React.Component {
-  render() {
-    // When the square component is rendered, it will receive the props value and onClick from Board.renderSquare()
-    // When the square component is clicked, it will call the function that was pass from renderSquare "handleClick()"
-    return (
-      <button className="square" onClick={() => this.props.onClick()}>
-        {this.props.value}
-      </button>
-    );
-  }
+function Square(props) {
+  // When the square component is rendered, it will receive the props value and onClick from Board.renderSquare()
+  // When the square component is clicked, it will call the function that was pass from renderSquare "handleClick()"
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 // BOARD Component
