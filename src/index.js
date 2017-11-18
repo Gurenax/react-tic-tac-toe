@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-// React Components:
-// Game - The main component for Tic-Tac-Toe
-// Board - a Game component has one Board
-// Square - a Board has 9 Square components
+/*
+  React Components:
+  Game - The main component for Tic-Tac-Toe
+  Board - a Game component has one Board
+  Square - a Board has 9 Square components
+*/
 
 // SQUARE Component
 function Square(props) {
@@ -29,11 +31,6 @@ class Board extends React.Component {
   }
 
   render() {
-    // const history = this.props.history; // Receive history from Game
-    // const current = history[history.length - 1]; // Last move in the history will be the current state of Square
-    // const winner = calculateWinner(current.squares); // If a winner has been found in the last move
-    
-
     return (
       <div>
         <div className="board-row">
@@ -89,6 +86,7 @@ class Game extends React.Component {
     });
   }
 
+  // When the Game move history is clicked, set to the state of that Step number (move)
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -98,20 +96,20 @@ class Game extends React.Component {
 
   render() {
     const history = this.state.history; // Receive history from Game
-    const current = history[this.state.stepNumber]; // Last move in the history will be the current state of Square
+    const current = history[this.state.stepNumber]; // stepNumber is initially 0
     const winner = calculateWinner(current.squares); // If a winner has been found in the last move
 
+    // Game Moves (step is the element in history array, move is the index of that element)
     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
+      const description = move ? 'Go to move #' + move : 'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>{description}</button>
         </li>
       );
     });
 
+    // Game status
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -119,6 +117,7 @@ class Game extends React.Component {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
+    // Render the game board
     return (
       <div className="game">
         <div className="game-board">
@@ -142,8 +141,6 @@ ReactDOM.render(
   <Game />,
   document.getElementById('root')
 );
-
-
 
 // Declare a winner
 function calculateWinner(squares) {
