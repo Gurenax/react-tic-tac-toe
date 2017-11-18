@@ -31,14 +31,16 @@ class Board extends React.Component {
   // When the square component is clicked, this is the function that is called
   handleClick(i) {
     const squares = this.state.squares.slice();
-    // if (squares[i]===null) {
-    
+    // If the square has already been clicked or a winner has been declared
+    if (squares[i] || calculateWinner(squares)) {
+      return; // Return and do nothing
+    }
+    // Otherwise, let the player click the square
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
     });
-    // }
   }
 
   // Each square is rendered as a Square component while passing value and onClick
